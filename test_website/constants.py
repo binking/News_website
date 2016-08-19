@@ -1,7 +1,10 @@
-'''
+"""
     Define some constants to use
-'''
+"""
 
+
+RETRY_TIMES = 5
+BBC_WEBSITE = "http://www.bbc.com/"
 RSS_SOURCES = {
     "Home": 'http://feeds.bbci.co.uk/news/rss.xml',
     "World": 'http://feeds.bbci.co.uk/news/world/rss.xml',
