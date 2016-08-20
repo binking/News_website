@@ -2,9 +2,12 @@
     Define some constants to use
 """
 
-
+DB_OPERATION_SUCCESS = 100
+DB_OPERATION_SUCCESS_MSG = "Very Good! Wirte database success ($_$)"
+DB_OPERATION_FAILED = -100
+DB_OPERATION_FAILED_MSG = "Terrible!!! Failed to write database >_< "
 RETRY_TIMES = 5
-BBC_WEBSITE = "http://www.bbc.com/"
+BBC_WEBSITE = "http://www.bbc.com"
 RSS_SOURCES = {
     "Home": 'http://feeds.bbci.co.uk/news/rss.xml',
     "World": 'http://feeds.bbci.co.uk/news/world/rss.xml',

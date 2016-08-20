@@ -11,7 +11,6 @@ from test_website.database import (
 class News(SurrogatePK, Model):
 
     __tablename__ = 'newses'
-
     title = db.Column(db.Text, default='')
     abstract = db.Column(db.Text, default='')
     content = db.Column(db.Text, default='')
@@ -22,5 +21,5 @@ class News(SurrogatePK, Model):
     status = db.Column(db.Integer, default=1)
     # tags = db.relationship('Tag', secondary=tags_posts, backref=db.backref('posts_br', lazy='dynamic'))
 
-    def __init__(self, title, slug, body, **kwargs):
-        db.Model.__init__(self, title=title, slug=slug, body=body, **kwargs)
+    def __init__(self, **kwargs):
+        db.Model.__init__(self, **kwargs)
