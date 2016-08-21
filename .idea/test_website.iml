@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$/../Web_development" />
     <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.5.2 virtualenv at ~/PythonProgramming/Web_development" jdkType="Python SDK" />
+    <content url="file://$MODULE_DIR$/../Web_development" />
+    <orderEntry type="jdk" jdkName="Python 3.4.3 virtualenv at ~/PythonProgramming/News_website/venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

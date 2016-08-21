@@ -17,5 +17,5 @@ class Topic(SurrogatePK, Model):
     creat_at = db.Column(db.DateTime, default=datetime.datetime.now())
     status = db.Column(db.Integer, default=1)
 
-    def __init__(self, tag, **kwargs):
-        db.Model.__init__(self, tag=tag, **kwargs)
+    def __init__(self, **kwargs):
+        db.Model.__init__(self, **kwargs)
