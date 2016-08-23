@@ -38,7 +38,7 @@ class DevConfig(Config):
     DB_NAME = 'dev.db'
     # Put the db file in project root
     DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@localhost/news_website'  # Unknown
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:jzbwymxjno1_mysql@localhost/news_website'  # Unknown
     DEBUG_TB_ENABLED = True
     ASSETS_DEBUG = True  # Don't bundle/minify static assets
     CACHE_TYPE = 'simple'  # Can be "memcached", "redis", etc.
