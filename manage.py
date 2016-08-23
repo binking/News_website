@@ -21,10 +21,12 @@ TEST_PATH = os.path.join(HERE, 'tests')
 
 manager = Manager(app)
 
+
 class IShell(Shell):
     def run(self, **kwargs):
         context = self.get_context()
         embed(context=context)
+
 
 def _make_context():
     """Return context dict for a shell session so you can access

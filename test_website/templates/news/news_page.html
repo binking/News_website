@@ -1,0 +1,62 @@
+
+{% extends "layout.html" %}
+
+{% block page_title %}News{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="page-header">
+                    News
+                </h1>
+                {% for news in newses %}
+                    <h2>
+                        <a href="{{ url_for('news.news_detail', pk=post.id) }}">{{ news.title }}</a>
+                    </h2>
+                    <p class="lead">
+                        by <a href="#">{{ news.author }}</a>
+                    </p>
+                    <p>Reported at: {{ news.report_time }}</p>
+                    <hr>
+                    <a class="btn btn-primary" href="{{ url_for('news.news_detail', pk=news.id) }}">Read More</a>
+                    <hr>
+                {% endfor %}
+                <ul class="pager">
+                    <li class="previous">
+                        <a href="{{ url_for('news.news_page', page=prev_page) }}">&larr; Older</a>
+                    </li>
+                    {% if not current %}
+                        <li class="next">
+                            <a href="{{ url_for('news.news_page', page=next_page) }}">Newer &rarr;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <br><br>
+                <div class="well">
+                    <h4>Popular topics</h4>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="#">topic 1</a>
+                                </li>
+                                <li><a href="#">topic 2</a>
+                                </li>
+                                <li><a href="#">topic 3</a>
+                                </li>
+                                <li><a href="#">topic 4</a>
+                                </li>
+                                <li><a href="#">topic 5</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock %}

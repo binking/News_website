@@ -14,7 +14,7 @@ from test_website.extensions import (
     migrate,
     debug_toolbar,
 )
-from test_website.views import public, user, blog
+from test_website.views import public, user, news
 
 
 def create_app(config_object=ProdConfig):
@@ -49,7 +49,7 @@ def register_extensions(app):
 def register_blueprints(app):
     app.register_blueprint(public.blueprint)
     app.register_blueprint(user.blueprint)
-    app.register_blueprint(blog.blueprint)
+    app.register_blueprint(news.blueprint)
     return None
 
 

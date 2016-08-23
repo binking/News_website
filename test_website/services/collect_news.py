@@ -28,6 +28,7 @@ from test_website.extensions import (
     debug_toolbar,
 )
 
+
 def parse_rss(url):
     rss = feedparser.parse(url)
     data = []
@@ -35,11 +36,12 @@ def parse_rss(url):
         data.append([entry['title'], entry['link'], entry['summary']])
     return data
 
+
 def _get_time_from_page(root):
     default_time = dt.datetime.now()
     time_str = ""
     paths_to_time = ['.//div[@class="date date--v2"]',
-                    './/p[@class="date date--v1"]']
+                     './/p[@class="date date--v1"]']
     path_to_time = './/time[@data-timestamp-inserted="true"]'
     for time_path in paths_to_time:
         time_ele = root.find(time_path)
@@ -55,6 +57,7 @@ def _get_time_from_page(root):
         default_time = dt.datetime.fromtimestamp(int(time_str))
     return default_time
 
+
 def _get_content_from_page(root):
     default_content = ""
     paths_to_text = ['.//div[@class="story-body__inner"]',
@@ -69,6 +72,7 @@ def _get_content_from_page(root):
                     default_content += p_ele.text
     return default_content
 
+
 def _get_topic_from_page(root):
     path_to_topic = './/a[@class="mini-info-list__section"]'
     default_topic = "Others"
@@ -78,6 +82,7 @@ def _get_topic_from_page(root):
         default_topic = topic_ele.text
         default_topic_url = topic_ele.get("href", "")
     return default_topic, default_topic_url
+
 
 def parse_bbc_page(url):
     try_time = 0
