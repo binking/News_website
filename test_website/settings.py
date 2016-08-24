@@ -28,6 +28,7 @@ class ProdConfig(Config):
     ENV = 'prod'
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = 'mysql://root:jzbwymxjno1_mysql@localhost/news_website'  # Unknown
+    MONGO_URI = "mongodb://[username:password@182.92.196.32:27017"
     DEBUG_TB_ENABLED = False  # Disable Debug toolbar
 
 

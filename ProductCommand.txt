@@ -1,0 +1,22 @@
+Todo list days by days
+
+2016/08/17
+1. Complete login module;
+2. Build connecions with MySQL;
+3. Build model layer, create tables;
+
+
+2016/08/20
+1. Collect news from BBC website and writ them into MySQL database;
+2. Make colect_news.py independent (add app context) and crontab it (run once per day);
+3. Learn more about xml, xpath, time and datetime;
+
+
+2016/08/22
+1. Change "blog" to "news" in cookiecutter template;
+2. Migrate data from MySQL to MongoDB; (NO, NO, NO, it's Serious)
+3. Show news pages;
+
+2016/08/23
+1. Basic website is OK!
+2. Send email about collecting news;
