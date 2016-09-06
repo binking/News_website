@@ -21,8 +21,13 @@ def load_user(id):
     return User.get_by_id(int(id))
 
 
-@blueprint.route("/", methods=["GET", "POST"])
+@blueprint.route("/", methods=["GET"])
 def home():
+    return render_template("public/home.html",
+                             today=datetime.datetime.today().strftime("%Y-%m-%d at %H:%M:%S"))
+
+@blueprint.route("/login", methods=["GET", "POST"])
+def login():
     form = LoginForm(request.form)
     # Handle logging in
     if request.method == 'POST':
@@ -33,7 +38,7 @@ def home():
             return redirect(redirect_url)
         else:
             flash_errors(form)
-    return render_extensions("public/home.html", form=form)
+    return render_extensions("public/login.html", form=form)
 
 
 @blueprint.route('/logout/')
@@ -54,6 +59,8 @@ def register():
                                email=form.email.data,
                                password=form.password.data,
                                active=True)
+        db.session.add(new_user)
+        db.session.commit()
         flash("Thank you for registering. You can now log in.", 'success')
         return redirect(url_for('public.home'))
     else:

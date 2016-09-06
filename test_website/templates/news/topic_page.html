@@ -24,11 +24,11 @@
                 {% endfor %}
                 <ul class="pager">
                     <li class="previous">
-                        <a href="{{ url_for('news.news_page', page=prev_page) }}">&larr; Older</a>
+                        <a href="{{ url_for('news.topic_page', topic=specified_topic, page=prev_page) }}">&larr; Older</a>
                     </li>
                     {% if not current %}
                         <li class="next">
-                            <a href="{{ url_for('news.news_page', page=next_page) }}">Newer &rarr;</a>
+                            <a href="{{ url_for('news.topic_page', topic=specified_topic, page=next_page) }}">Newer &rarr;</a>
                         </li>
                     {% endif %}
                 </ul>

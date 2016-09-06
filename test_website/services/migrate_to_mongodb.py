@@ -9,7 +9,7 @@ if PREFIX not in sys.path:
     sys.path.append(PARENT)
 
 from test_website.app import create_app, create_mongo_app
-from test_website.settings import DevConfig, ProdConfig
+from test_website.settings import OSxConfig, ProdConfig
 from test_website.extensions import db, mongo
 from test_website.models.news import News
 from test_website.models.user import User
@@ -26,8 +26,8 @@ if __name__=="__main__":
         mysql_app = create_app(ProdConfig)
         mongo_app = create_mongo_app(ProdConfig)
     else:
-        mysql_app = create_app(DevConfig)
-        mongo_app = create_mongo_app(DevConfig)
+        mysql_app = create_app(OSxConfig)
+        mongo_app = create_mongo_app(OSxConfig)
 
     with mysql_app.app_context(), mongo_app.app_context():
         print("I am In")

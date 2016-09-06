@@ -8,7 +8,7 @@ Todo list days by days
 
 2016/08/20
 1. Collect news from BBC website and writ them into MySQL database;
-2. Make colect_news.py independent (add app context) and crontab it (run once per day);
+2. Make collect_news.py independent (add app context) and crontab it (run once per day);
 3. Learn more about xml, xpath, time and datetime;
 
 
@@ -20,3 +20,46 @@ Todo list days by days
 2016/08/23
 1. Basic website is OK!
 2. Send email about collecting news;
+
+2016/08/27
+1. Compute word count and draw word cloud on /stat/;
+2. Scraping news;
+
+
+2016/09/03
+1. uWSGI + Flask + Python3, failed
+Details:
+Fatal Python error: Py_Initialize: unable to load the file system codec
+ImportError: No module named 'encodings'
+2. Using gunicorn: gunicorn -w4 -b 127.0.0.1:5000 run:news_web
+Details:
+    A. app.run(host=127.0.0.1, port = 5000, debug=True)
+        --> SyntaxError: invalid syntax --> gunicorn.errors.HaltServer: <HaltServer 'Worker failed to boot.' 3>
+        Solution: change to "app.run(debug=True)"
+    B. gunicorn.errors.HaltServer: <HaltServer 'App failed to load.' 4>
+        Solution: test_website.app has ambiguity, using test_website.app.create_app to craete new app,
+        that app is our need, instead of app.py
+3. export OSxEnv to system variable, solve the problem of choosing configuration.
+4. Not end, learn more about gunicorn and uWSGI, esp WSGI
+
+
+2016/09/04
+1. Install SuperVisor, but it don;t support Py3.
+2. Add Nginx;
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that nginx can run without sudo.
+nginx will load all files in /usr/local/etc/nginx/servers/.
+To have launchd start nginx now and restart at login: brew services start nginx
+Or, if you don't want/need a background service you can just run: nginx
+
+2016/09/06
+1. Solve messy code problem; e.g: http://www.bbc.com/cymrufyw/37278149; http://www.bbc.com/news/uk-scotland-highlands-islands-37274985
+detail: existed_news = News.query.filter_by(source_url=data[1]).first()
+    sqlalchemy.exc.InvalidRequestError: This Session's transaction has been rolled back due to a previous exception
+    during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was:
+     (_mysql_exceptions.OperationalError) (1366, "Incorrect string value: '\\xC5\\xB5yl R...' for column 'title' at row
+     1") [SQL: 'INSERT INTO newses (title, abstract, content, source_url, created_at, report_time, status) VALUES (%s,
+     %s, %s, %s, %s, %s, %s)'] [parameters: ('Lluniau: Gŵyl Rhif 6', "Casgliad o luniau gan Iolo Penri o'r ŵyl
+      ym Mhortmeirion", "Er bod y glaw mawr wedi gwneud y penawdau yng Ng\\xc5\\xb5yl Rhif 6 eleni, heidiodd miloedd
+      o bobl i\\'r \\xc5\\xb5yl gerddoriaeth boblogaidd ym Mhortmeirion dros y penwythnos.Dyma gasgliad o luniau\\'r
+      ffotograffydd Iolo Penri, a oedd yno i weld y cyfan ar ran Cymru Fyw:", 'http://www.bbc.co.uk/newyddion/37278149',
+      datetime.datetime(2016, 9, 6, 21, 16, 51, 673737), datetime.datetime(2016, 9, 5, 21, 22, 33), 1)]

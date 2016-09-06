@@ -32,7 +32,7 @@ class ProdConfig(Config):
     DEBUG_TB_ENABLED = False  # Disable Debug toolbar
 
 
-class DevConfig(Config):
+class OSxConfig(Config):
     """Development configuration."""
     ENV = 'dev'
     DEBUG = True
