@@ -63,3 +63,4 @@ detail: existed_news = News.query.filter_by(source_url=data[1]).first()
       o bobl i\\'r \\xc5\\xb5yl gerddoriaeth boblogaidd ym Mhortmeirion dros y penwythnos.Dyma gasgliad o luniau\\'r
       ffotograffydd Iolo Penri, a oedd yno i weld y cyfan ar ran Cymru Fyw:", 'http://www.bbc.co.uk/newyddion/37278149',
       datetime.datetime(2016, 9, 6, 21, 16, 51, 673737), datetime.datetime(2016, 9, 5, 21, 22, 33), 1)]
+2. Show word cloud on front-end: http://bl.ocks.org/ericcoopey/6382449
