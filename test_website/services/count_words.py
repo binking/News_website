@@ -4,7 +4,7 @@ from test_website.models.news import News
 from test_website.extensions import db
 from test_website.constants import STOP_WORDS, ENGLISH_WORD_REXPR
 # from Stemmer import PorterStemmer
-from nltk.stem.snowball import PortugueseStemmer
+# from nltk.stem.snowball import PortugueseStemmer
 
 
 def load_stop_words():
@@ -21,24 +21,25 @@ def tokenize(text):
     # tokens = text.lower().split()
     # import ipdb;ipdb.set_trace()
     # stems = [stemming(token) for token in tokens if token.isalpha()]
-    tokens = tokens_re.findall(text)
-    if 'tak' in tokens or 'mad' in tokens or 'thre' in tokens:
-        print(tokens)
-    stems = [token for token in tokens if token.isalpha()]
+    tokens = tokens_re.findall(text.lower())
+    stems = [token for token in tokens if token.isalpha() and len(token) > 1]
     stems = [stem for stem in stems if not is_stop_word(stem)]
     return stems
 
 
+# Why steeming remove e at the ending of token
 def stemming(word):
     # stemmer = PorterStemmer()
     stemmer = PortugueseStemmer()
     # stem = stemmer.stem(word, 0, len(word)-1)
     return stemmer.stem(word)
 
+
 def is_stop_word(word,):
     if word in STOP_WORDS:
         return True
     return False
+
 
 def word_count(most_freq=30):
     # vacabulary = []
@@ -50,9 +51,10 @@ def word_count(most_freq=30):
         else:
             abstract = News.query.filter(News.id==news_id).first().abstract
             tokens = tokenize(abstract)
-        bag_of_words.update([stemming(token) for token in tokens])
-    # bag_of_words.update(vacabulary)
+        bag_of_words.update(tokens)
+
     return bag_of_words.most_common(most_freq)
+
 
 if __name__=="__main__":
     try:
