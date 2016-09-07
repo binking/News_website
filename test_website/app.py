@@ -13,6 +13,7 @@ from test_website.extensions import (
     mail,
     migrate,
     debug_toolbar,
+    mongo
 )
 from test_website.views import public, user, news
 
@@ -33,6 +34,37 @@ def create_app(config_object=ProdConfig):
     register_blueprints(app)
     register_errorhandlers(app)
     return app
+
+
+def create_mongo_app(config_object=ProdConfig):
+    """
+    For differing from db(MySQL), create another app for PyMongo
+    Args:
+        config_object: config object, (DevConfig, ProdConfig)
+
+    Returns: app
+
+    """
+    app = Flask("mongo_" + __name__)
+    app.config.from_object(config_object)
+
+    register_mongo_extensions(app)
+    register_blueprints(app)
+    register_errorhandlers(app)
+    return app
+
+
+def register_mongo_extensions(app):
+    assets.init_app(app)
+    bcrypt.init_app(app)
+    cache.init_app(app)
+    mongo.init_app(app)
+    login_manager.init_app(app)
+    debug_toolbar.init_app(app)
+    migrate.init_app(app, mongo)
+    mail.init_app(app)
+    return None
+
 
 def register_extensions(app):
     assets.init_app(app)
