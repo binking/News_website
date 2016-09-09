@@ -29,11 +29,13 @@ def tokenize(text):
     return stems
 
 
+# Why steeming remove e at the ending of token
 def stemming(word):
     # stemmer = PorterStemmer()
     stemmer = PortugueseStemmer()
     stem = stemmer.stem(word)
     return stemmer.stem(stem)
+
 
 
 def is_stop_word(word,):
@@ -56,6 +58,7 @@ def word_count(most_freq=30):
         # bag_of_words.update(tokens)
     # bag_of_words.update(vacabulary)
     return bag_of_words.most_common(most_freq)
+
 
 if __name__=="__main__":
     try:
