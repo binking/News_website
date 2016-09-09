@@ -23,3 +23,6 @@ debug_toolbar = DebugToolbarExtension()
 
 from flask_mail import Mail
 mail = Mail()
+
+from flask_pymongo import PyMongo
+mongo = PyMongo()

@@ -59,6 +59,8 @@ def register():
                                email=form.email.data,
                                password=form.password.data,
                                active=True)
+        db.session.add(new_user)
+        db.session.commit()
         flash("Thank you for registering. You can now log in.", 'success')
         return redirect(url_for('public.home'))
     else:

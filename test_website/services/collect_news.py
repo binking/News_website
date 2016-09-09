@@ -14,7 +14,7 @@ if PREFIX not in sys.path:
     sys.path.append(PARENT)
 
 from test_website.app import create_app
-from test_website.settings import DevConfig, ProdConfig
+from test_website.settings import OSxConfig, ProdConfig
 from test_website.constants import *
 from test_website.models.news import News
 from test_website.models.topic import Topic
@@ -46,12 +46,12 @@ def _get_time_from_page(root):
     for time_path in paths_to_time:
         time_ele = root.find(time_path)
         if (time_ele is not None) and (time_ele.get('data-seconds', 0)):
-            print("Effiecient time path is ", time_path)
+            # print("Effiecient time path is ", time_path)
             time_str = time_ele.get("data-seconds", "")
     if not time_str:
         time_ele = root.find(path_to_time)
         if time_ele is not None:
-            print("Effiecient time path is", path_to_time)
+            # print("Effiecient time path is", path_to_time)
             time_str = time_ele.get("timestamp", "")
     if time_str:
         default_time = dt.datetime.fromtimestamp(int(time_str))
@@ -163,7 +163,7 @@ if __name__=="__main__":
     if os.environ.get("TEST_WEBSITE_ENV") == 'prod':
         app = create_app(ProdConfig)
     else:
-        app = create_app(DevConfig)
+        app = create_app(OSxConfig)
 
     with app.app_context():
         print("I am In")

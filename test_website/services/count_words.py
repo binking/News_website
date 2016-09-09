@@ -5,6 +5,8 @@ from test_website.extensions import db
 from test_website.constants import STOP_WORDS, ENGLISH_WORD_REXPR
 # from Stemmer import PorterStemmer
 from nltk.stem.snowball import PortugueseStemmer
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 
 def load_stop_words():
@@ -22,23 +24,23 @@ def tokenize(text):
     # import ipdb;ipdb.set_trace()
     # stems = [stemming(token) for token in tokens if token.isalpha()]
     tokens = tokens_re.findall(text)
-    if 'tak' in tokens or 'mad' in tokens or 'thre' in tokens:
-        print(tokens)
-    stems = [token for token in tokens if token.isalpha()]
-    stems = [stem for stem in stems if not is_stop_word(stem)]
+    stems = [token.lower() for token in tokens if token.isalpha()]
+    stems = [stem for stem in stems if len(stem) > 1 and not is_stop_word(stem)]
     return stems
 
 
 def stemming(word):
     # stemmer = PorterStemmer()
     stemmer = PortugueseStemmer()
-    # stem = stemmer.stem(word, 0, len(word)-1)
-    return stemmer.stem(word)
+    stem = stemmer.stem(word)
+    return stemmer.stem(stem)
+
 
 def is_stop_word(word,):
     if word in STOP_WORDS:
         return True
     return False
+
 
 def word_count(most_freq=30):
     # vacabulary = []
@@ -48,14 +50,22 @@ def word_count(most_freq=30):
         if news_id_text_dict[news_id]:
             tokens = tokenize(news_id_text_dict[news_id])
         else:
-            abstract = News.query.filter(News.id==news_id).first().abstract
+            abstract = News.query.filter(News.id == news_id).first().abstract
             tokens = tokenize(abstract)
         bag_of_words.update([stemming(token) for token in tokens])
+        # bag_of_words.update(tokens)
     # bag_of_words.update(vacabulary)
     return bag_of_words.most_common(most_freq)
 
 if __name__=="__main__":
     try:
-        print(word_count(50))
+        wordcloud = WordCloud(width=1500,
+                              height=1200,
+                              max_words=200
+                              ).generate_from_frequencies(word_count(200))
+        plt.imshow(wordcloud)
+        plt.axis("off")
+        plt.show()
+
     except KeyboardInterrupt:
         print("Stop")
