@@ -150,7 +150,7 @@ def collect_news():
 
 
 if __name__=="__main__":
-    if os.environ.get("HOME") == 'Users/chibin':  # mac env
+    if os.environ.get("HOME") == '/Users/chibin':  # mac env
         app = create_app(OSxConfig)
     else:
         app = create_app(TestConfig)
