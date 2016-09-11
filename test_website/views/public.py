@@ -11,7 +11,7 @@ from test_website.models.user import User
 from test_website.forms.public import LoginForm
 from test_website.forms.user import RegisterForm
 from test_website.utils import flash_errors, render_extensions
-# from test_website.database import db
+from test_website.database import db
 
 blueprint = Blueprint('public', __name__, static_folder="../static")
 

@@ -1,5 +1,9 @@
 *.py[cod]
 
+*.txt~
+nginx.conf
+uwsgi.ini
+
 # PyCharm
 .idea
 # C extensions
