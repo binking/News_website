@@ -64,3 +64,12 @@ detail: existed_news = News.query.filter_by(source_url=data[1]).first()
       ffotograffydd Iolo Penri, a oedd yno i weld y cyfan ar ran Cymru Fyw:", 'http://www.bbc.co.uk/newyddion/37278149',
       datetime.datetime(2016, 9, 6, 21, 16, 51, 673737), datetime.datetime(2016, 9, 5, 21, 22, 33), 1)]
 2. Show word cloud on front-end: http://bl.ocks.org/ericcoopey/6382449
+
+
+2016/09/08
+1. Stop try uWSGI/ gunicorn/ Nginx
+error: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/tmp/mysql.sock
+    Solution: brew services start mysql
+2. Pay attention to more practical requirement
+
+
