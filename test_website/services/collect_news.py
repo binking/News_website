@@ -13,12 +13,14 @@ if PREFIX not in sys.path:
     sys.path.append(PREFIX)
     sys.path.append(PARENT)
 
+from test_website.utils import retry
 from test_website.app import create_app
 from test_website.settings import OSxConfig, TestConfig
 from test_website.constants import *
 from test_website.models.news import News
 from test_website.models.topic import Topic
 from test_website.extensions import db
+
 
 def parse_rss(url):
     rss = feedparser.parse(url)
@@ -74,40 +76,21 @@ def _get_topic_from_page(root):
     return default_topic, default_topic_url
 
 
+@retry(RETRY_TIMES)
 def parse_bbc_page(url):
-    try_time = 0
-    sleep_time = 0
     data = {}
     page_url = url
 
-    while try_time < RETRY_TIMES:
-        try:
-            try_time += 1
-            page = urlopen(page_url, timeout=10)
-            # import ipdb;ipdb.set_trace()
-            text = str(page.read())
-            root = etree.parse(StringIO(text), etree.HTMLParser()).getroot()
-            topic_info = _get_topic_from_page(root)
-            data.update(body=_get_content_from_page(root),
-                        report_time=_get_time_from_page(root),
-                        topic=topic_info[0],
-                        topic_url= BBC_WEBSITE + topic_info[1]
-                        )
-            break
-        # print(len(data.values()))
-        except AttributeError as e:
-            traceback.print_exc()
-            print("Attribute error")
-            break
-        except SocketError as e:
-            traceback.print_exc()
-            print("Try more %d times" % (RETRY_TIMES - try_time))
-        except Exception as e:
-            # import ipdb;ipdb.set_trace()
-            traceback.print_exc()
-            print("Try more %d times" % (RETRY_TIMES - try_time))
-        time.sleep(pow(2, sleep_time + 1))
-        sleep_time += 1
+    page = urlopen(page_url, timeout=10)
+    text = str(page.read())
+    root = etree.parse(StringIO(text), etree.HTMLParser()).getroot()
+    topic_info = _get_topic_from_page(root)
+    data.update(
+        body=_get_content_from_page(root),
+        report_time=_get_time_from_page(root),
+        topic=topic_info[0],
+        topic_url= BBC_WEBSITE + topic_info[1]
+    )
 
     return data
 
@@ -122,6 +105,7 @@ def collect_news():
         rss_data = parse_rss(rss)
         for data in rss_data:
             existed_news = News.query.filter_by(source_url=data[1]).first()
+            print(data[1])
             if existed_news:
                 print("Existed article, omit.....")
                 break

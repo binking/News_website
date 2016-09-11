@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Helper utilities and decorators."""
+import time, traceback
 from flask import flash, render_template, current_app
 
 
@@ -24,3 +25,20 @@ def render_extensions(template_path, **kwargs):
                            _GOOGLE_ANALYTICS=current_app.config['GOOGLE_ANALYTICS'],
                            **kwargs)
 
+
+# deal with retry
+def retry(try_time):
+    def decorator(func):
+        def wrapper(*args, **kw):
+            attempt = 0
+            while attempt < try_time:
+                try:
+                    return func(*args, **kw)
+                except Exception as e:
+                    traceback.print_exc()
+                    print("Sleep %d seconds and Try more %d times" % (pow(2, attempt + 1), try_time - attempt - 1))
+                    attempt += 1
+                    time.sleep(pow(2, attempt + 1))
+        return wrapper
+
+    return decorator

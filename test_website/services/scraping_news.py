@@ -1,5 +1,7 @@
-import re, requests, time
+import requests, time
 from lxml import html
+from test_website.constants import RETRY_TIMES
+from test_website.utils import retry
 
 
 def scraping_news(url):
@@ -8,19 +10,18 @@ def scraping_news(url):
         print(len(r.text))
 
 
+@retry(RETRY_TIMES)
 def get_news_urls(url):
-    try:
-        r = requests.get(url)
-        if r.status_code == 200:
-            root = html.fromstring(r.text)
-            a_tags = root.xpath('.//h2/a[@href]')
-            for a in a_tags:
-                print(a.get('href'))
-                scraping_news(a.get('href'))
-    except Exception as e:
-        print(e)
-        return -1
-    return 0
+    r = requests.get(url)
+    if r.status_code == 200:
+        root = html.fromstring(r.text)
+        a_tags = root.xpath('.//h2/a[@href]')
+        for a in a_tags:
+            print(a.get('href'))
+            scraping_news(a.get('href'))
+        return 0
+    return -1
+
 
 if __name__ == "__main__":
     url = 'http://0.0.0.0:5000/news/{}'
