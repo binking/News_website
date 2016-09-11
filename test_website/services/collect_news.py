@@ -14,7 +14,7 @@ if PREFIX not in sys.path:
     sys.path.append(PARENT)
 
 from test_website.app import create_app
-from test_website.settings import OSxConfig, ProdConfig
+from test_website.settings import OSxConfig, TestConfig
 from test_website.constants import *
 from test_website.models.news import News
 from test_website.models.topic import Topic
@@ -150,10 +150,10 @@ def collect_news():
 
 
 if __name__=="__main__":
-    if os.environ.get("TEST_WEBSITE_ENV") != 'osx':
-        app = create_app(ProdConfig)
-    else:
+    if os.environ.get("HOME") == 'Users/chibin':  # mac env
         app = create_app(OSxConfig)
+    else:
+        app = create_app(TestConfig)
 
     with app.app_context():
         print("I am In")

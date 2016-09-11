@@ -1,3 +1,0 @@
-2016/08/31
-Add interface for words count --> /statistics
-Make wrod cloud

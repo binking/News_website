@@ -8,13 +8,13 @@ from flask_migrate import MigrateCommand
 
 from test_website.app import create_app
 from test_website.models.user import User
-from test_website.settings import OSxConfig, ProdConfig
+from test_website.settings import OSxConfig, TestConfig
 from test_website.database import db
 
-if os.environ.get("TEST_WEBSITE_ENV") == 'prod':
-    app = create_app(ProdConfig)
-else:
+if os.environ.get("HOME") == '/Users/chibin':  # Mac book env
     app = create_app(OSxConfig)
+else:  # linux env
+    app = create_app(TestConfig)
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 TEST_PATH = os.path.join(HERE, 'tests')

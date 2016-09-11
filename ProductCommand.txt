@@ -26,6 +26,11 @@ Todo list days by days
 2. Scraping news;
 
 
+2016/08/31
+Add interface for words count --> /statistics
+Make wrod cloud
+
+
 2016/09/03
 1. uWSGI + Flask + Python3, failed
 Details:
