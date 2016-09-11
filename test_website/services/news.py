@@ -20,7 +20,6 @@ def get_news_detail(pk):
         'topics':,
     }
     """
-
     news = News.query.filter_by(id=int(pk)).first()
     news_blob = {
         'id': news.id,
@@ -75,7 +74,6 @@ def get_hot_topics(n):
     all_topics = db.session.query(Topic.topic).all()
     for topic in all_topics:
         t = topic.topic
-        print(t)
         newses = News.query.filter(News.topics.any(topic=t)).all()
         topic_freq[t] = len(newses)
     results = sorted(topic_freq.items(), key=lambda x:x[1], reverse=True)[:n]

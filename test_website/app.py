@@ -27,9 +27,6 @@ def create_app(config_object=ProdConfig):
     app = Flask(__name__)
     app.config.from_object(config_object)
 
-    if config_object == ProdConfig:
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)

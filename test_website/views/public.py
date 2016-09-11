@@ -26,7 +26,7 @@ def home():
     return render_template("public/home.html",
                              today=datetime.datetime.today().strftime("%Y-%m-%d at %H:%M:%S"))
 
-@blueprint.route("/login", methods=["GET", "POST"])
+@blueprint.route("/login/", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
     # Handle logging in
