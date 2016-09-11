@@ -76,3 +76,5 @@ error: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/
     Solution: brew services start mysql
 2. Pay attention to more practical requirement
 
+2016/09/11
+1. Learn using pytest
