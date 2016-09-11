@@ -57,7 +57,6 @@ def _get_content_from_page(root):
     for text_path in paths_to_text:
         body_ele = root.find(text_path)
         if body_ele is not None:
-            print("Effiecient body path is ", text_path)
             for p_ele in body_ele.findall("p"):
                 if p_ele.text:
                     default_content += p_ele.text
