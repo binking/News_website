@@ -26,6 +26,11 @@ def home():
     return render_template("public/home.html",
                              today=datetime.datetime.today().strftime("%Y-%m-%d at %H:%M:%S"))
 
+@blueprint.route("/qin_collapse", methods=["GET"])
+def show_qin_collapse():
+    return render_template("public/qin_collapse.html")
+
+
 @blueprint.route("/login/", methods=["GET", "POST"])
 def login():
     form = LoginForm(request.form)
