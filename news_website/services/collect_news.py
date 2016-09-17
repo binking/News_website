@@ -64,6 +64,7 @@ def _get_title_from_page(root):
 def _get_content_from_page(root):
     content = ""
     paths_to_text = [
+        './/div[@class="widget-richtext-pullquote"]',  # for archive news
         './/div[@class="story-body__inner"]',
         './/div[@class="story-body sp-story-body gel-body-copy"]',
         './/div[@class="map-body"]',
@@ -214,7 +215,7 @@ def recursive_scrap_news(start_url, max_iter=5, iter_time=0):
             recursive_scrap_news(url, max_iter=max_iter, iter_time=deepth+1)
         except SQLAlchemyError as e:
             print("Write Database error")
-            traceback.print_exc(e)
+            traceback.print_exc()
             continue
         except Exception as e:
             print("Terrible !!! (>_<)")
@@ -232,36 +233,7 @@ def create_collector_thread(url, max_iter):
     thread.start()
 
 
-def main():
-    if os.environ.get("HOME") == '/Users/chibin':  # mac env
-        app = create_app(OSxConfig)
-    else:
-        app = create_app(TestConfig)
-
-    with app.app_context():
-        # urls_to_parse = Queue()
-        categories_list = [
-            "http://www.bbc.com/news/world",
-            "http://www.bbc.com/news/world/asia",
-            "http://www.bbc.com/news",
-            "http://www.bbc.com/news/science_and_environment",
-            "http://www.bbc.com/news/entertainment_and_arts",
-            "http://www.bbc.com/news/asia/health",
-            "http://www.bbc.com/news/world/asia/china"
-        ]
-        for cate in categories_list:
-            print("\nStart url: ", cate, "\n\n")
-            recursive_scrap_news(cate, max_iter=3)
-        # create_collector_thread(url, max_iter=20)
-
-
-if __name__ == "__main__":
-    start_time = time.time()
-    main()
-    print("Time consuming: %d" % (time.time() - start_time))
-'''
-
-def collect_news():
+def collect_rss_news():
     """
    :param data: list of lists --> [title, link, summary]
    :param RSS_SOURCE: dict of {topic, rss_url}
@@ -298,4 +270,40 @@ def collect_news():
                     traceback.print_exc()
 
 
-'''
+def collect_archive_news():
+    source_url = "http://www.bbc.co.uk/informationandarchives/archivenews"
+
+
+def main():
+    if os.environ.get("HOME") == '/Users/chibin':  # mac env
+        app = create_app(OSxConfig)
+    else:
+        app = create_app(TestConfig)
+
+    with app.app_context():
+        # urls_to_parse = Queue()
+        collect_rss_news()
+        categories_list = [
+            "http://www.bbc.com/news/technology-36893104",
+            "http://www.bbc.com/news/world-us-canada-37247077",
+            "http://www.bbc.com/news/technology-36680043",
+            "http://www.bbc.com/news/uk-england-37183161",
+            "http://www.bbc.com/news/world-us-canada-20874451",
+            "http://www.bbc.com/news/world-asia-36742751",
+            "http://www.bbc.com/news/world-asia-34581340",
+            "http://www.bbc.com/news/world-asia-37007106",
+            "http://www.bbc.com/news/world-asia-19725705",
+            "http://www.bbc.com/news/world-asia-36757872"
+        ]
+        # for cate in categories_list[::-1]:
+        #    print("\nStart url: ", cate, "\n\n")
+        #    recursive_scrap_news(cate, max_iter=4)
+        # create_collector_thread(url, max_iter=20)
+
+
+if __name__ == "__main__":
+    start_time = time.time()
+    main()
+    print("Time consuming: %d" % (time.time() - start_time))
+
+
