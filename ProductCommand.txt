@@ -78,3 +78,19 @@ error: ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/
 
 2016/09/11
 1. Learn using pytest
+
+
+2016/09/16
+1. Learn design Queue and Cache;
+2. Learn basic test programming;
+3. Collect news recursively;
+
+Error:
+A. sqlalchemy.exc.InvalidRequestError: This Session's transaction has been rolled back due to a previous exception
+    during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was:
+    (_mysql_exceptions.DataError) (1406, "Data too long for column 'content' at row 1")
+    Content Is Too Long ????
+B. Unicode error: sqlalchemy.exc.InvalidRequestError: This Session's transaction has been rolled back due to a previous
+   exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original
+   exception was: (_mysql_exceptions.OperationalError) (1366, "Incorrect string value: '\\xE2\\x80\\xA8She...'
+   e.g: http://www.bbc.com/news/business-12686570

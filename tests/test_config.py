@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from test_website.app import create_app
-from test_website.settings import ProdConfig, OSxConfig
+from news_website.app import create_app
+from news_website.settings import ProdConfig, OSxConfig
 
 
 def test_production_config():

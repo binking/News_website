@@ -1,6 +1,6 @@
 import os
-from test_website.app import create_app
-from test_website.settings import ProdConfig, OSxConfig
+from news_website.app import create_app
+from news_website.settings import ProdConfig, OSxConfig
 
 
 if os.environ.get("NEWS_WEBSITE_ENV") == 'osx':

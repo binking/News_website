@@ -5,9 +5,9 @@ import os
 import pytest
 from webtest import TestApp
 
-from test_website.settings import TestConfig
-from test_website.app import create_app
-from test_website.database import db as _db
+from news_website.settings import TestConfig
+from news_website.app import create_app
+from news_website.database import db as _db
 
 from .factories import UserFactory
 

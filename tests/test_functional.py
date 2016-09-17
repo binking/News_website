@@ -7,7 +7,7 @@ import pytest
 from flask import url_for
 
 
-from test_website.models.user import User
+from news_website.models.user import User
 from .factories import UserFactory
 
 

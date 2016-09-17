@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 import pytest
 
-from test_website.forms.public import LoginForm
-from test_website.forms.user import RegisterForm
-from .factories import UserFactory
+from news_website.forms.public import LoginForm
+from news_website.forms.user import RegisterForm
 
 
 class TestRegisterForm:

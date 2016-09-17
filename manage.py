@@ -6,10 +6,10 @@ from flask_script import Manager, Shell, Server
 from flask_script.commands import Clean, ShowUrls
 from flask_migrate import MigrateCommand
 
-from test_website.app import create_app
-from test_website.models.user import User
-from test_website.settings import OSxConfig, TestConfig
-from test_website.database import db
+from news_website.app import create_app
+from news_website.models.user import User
+from news_website.settings import OSxConfig, TestConfig
+from news_website.database import db
 
 if os.environ.get("HOME") == '/Users/chibin':  # Mac book env
     app = create_app(OSxConfig)

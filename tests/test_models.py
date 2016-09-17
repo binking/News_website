@@ -4,7 +4,7 @@ import datetime as dt
 
 import pytest
 
-from test_website.models.user import User
+from news_website.models.user import User
 from .factories import UserFactory
 
 
