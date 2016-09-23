@@ -270,10 +270,6 @@ def collect_rss_news():
                     traceback.print_exc()
 
 
-def collect_archive_news():
-    source_url = "http://www.bbc.co.uk/informationandarchives/archivenews"
-
-
 def main():
     if os.environ.get("HOME") == '/Users/chibin':  # mac env
         app = create_app(OSxConfig)
@@ -282,18 +278,16 @@ def main():
 
     with app.app_context():
         # urls_to_parse = Queue()
-        collect_rss_news()
+        # collect_rss_news()
         categories_list = [
-            "http://www.bbc.com/news/technology-36893104",
-            "http://www.bbc.com/news/world-us-canada-37247077",
-            "http://www.bbc.com/news/technology-36680043",
-            "http://www.bbc.com/news/uk-england-37183161",
-            "http://www.bbc.com/news/world-us-canada-20874451",
-            "http://www.bbc.com/news/world-asia-36742751",
-            "http://www.bbc.com/news/world-asia-34581340",
-            "http://www.bbc.com/news/world-asia-37007106",
-            "http://www.bbc.com/news/world-asia-19725705",
-            "http://www.bbc.com/news/world-asia-36757872"
+            "http://www.bbc.com/news",
+            "http://www.bbc.com/news/world",
+            "http://www.bbc.com/news/uk",
+            "http://www.bbc.com/news/world/asia/china",
+            "http://www.bbc.com/news/world/asia",
+            "http://www.bbc.com/news/technology",
+            "http://www.bbc.com/news/science_and_environment",
+            "http://www.bbc.com/news/asia/health"
         ]
         # for cate in categories_list[::-1]:
         #    print("\nStart url: ", cate, "\n\n")
